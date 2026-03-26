@@ -19,21 +19,20 @@
         </div>
     </div>
 
-    <script type="module">     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";     import { getFirestore, collection, getDocs, orderBy, query } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";      // Your Firebase config (replace with yours if different)     const firebaseConfig = {         apiKey: "AIzaSyCFpTZyULAwlyZdUpdT-4cK7_sY3U0yiWk",         authDomain: "portfolio-messages-56241.firebaseapp.com",         projectId: "portfolio-messages-56241",         storageBucket: "portfolio-messages-56241.firebasestorage.app",         messagingSenderId: "115427367526",         appId: "1:115427367526:web:6fe2f8a78f8bb90bf5eba7",         measurementId: "G-E5GLVXWLR5"     };      const app = initializeApp(firebaseConfig);     const db = getFirestore(app);      const loginBtn = document.getElementById('login-btn');     const passwordInput = document.getElementById('admin-password');     const loginArea = document.getElementById('login-area');     const messagesArea = document.getElementById('messages-area');     const messagesList = document.getElementById('messages-list');      const ADMIN_PASSWORD = "your_secret_password"; // Change this to your real password      loginBtn.addEventListener('click', async () => {         if (passwordInput.value === ADMIN_PASSWORD) {             loginArea.style.display = 'none';             messagesArea.style.display = 'block';             await loadMessages();         } else {             alert("Wrong password");         }     });      async function loadMessages() {         const q = query(collection(db, "messages"), orderBy("timestamp", "desc"));         const querySnapshot = await getDocs(q);         messagesList.innerHTML = '';         querySnapshot.forEach((doc) => {             const data = doc.data();             const li = document.createElement('li');             li.style.background = '#f9f9f9';             li.style.margin = '1rem 0';             li.style.padding = '1rem';             li.style.borderRadius = '5px';             li.innerHTML = `<strong>${data.name}</strong> (${data.email})<br>${data.message}<br><small>${data.timestamp?.toDate?.() || 'unknown date'}</small>`;             messagesList.appendChild(li);         });     } </script>
+    <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
         import { getFirestore, collection, getDocs, orderBy, query } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
 
-        // 🔁 Replace with your actual Firebase config (same as in index.html)
+        // Your Firebase config (use the one from your project)
         const firebaseConfig = {
-            const firebaseConfig = {
-    apiKey: "AIzaSyCFpTZyULAwlyZdUpdT-4cK7_sY3U0yiWk",
-    authDomain: "portfolio-messages-56241.firebaseapp.com",
-    projectId: "portfolio-messages-56241",
-    storageBucket: "portfolio-messages-56241.firebasestorage.app",
-    messagingSenderId: "115427367526",
-    appId: "1:115427367526:web:6fe2f8a78f8bb90bf5eba7",
-    measurementId: "G-E5GLVXWLR5"
-  };
+            apiKey: "AIzaSyCFpTZyULAwlyZdUpdT-4cK7_sY3U0yiWk",
+            authDomain: "portfolio-messages-56241.firebaseapp.com",
+            projectId: "portfolio-messages-56241",
+            storageBucket: "portfolio-messages-56241.firebasestorage.app",
+            messagingSenderId: "115427367526",
+            appId: "1:115427367526:web:6fe2f8a78f8bb90bf5eba7",
+            measurementId: "G-E5GLVXWLR5"
+        };
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
@@ -44,7 +43,7 @@
         const messagesArea = document.getElementById('messages-area');
         const messagesList = document.getElementById('messages-list');
 
-        // 🔐 Change this to a strong password
+        // 🔐 Change this to the password you want
         const ADMIN_PASSWORD = "Atom2285";
 
         loginBtn.addEventListener('click', async () => {
