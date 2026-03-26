@@ -1,42 +1,100 @@
-<script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
-    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raymond Melchior | Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Raymond Melchior</h1>
+        <p>BCA 1st Year | Kristu Jayanti University</p>
+        <p>Web Developer in the making</p>
+    </header>
 
-    // 🔁 Your real Firebase config (from Firebase Console)
-    const firebaseConfig = {
-        apiKey: "AIzaSyCFpTZyULAwlyZdUpdT-4cK7_sY3U0yiWk",
-        authDomain: "portfolio-messages-56241.firebaseapp.com",
-        projectId: "portfolio-messages-56241",
-        storageBucket: "portfolio-messages-56241.firebasestorage.app",
-        messagingSenderId: "115427367526",
-        appId: "1:115427367526:web:6fe2f8a78f8bb90bf5eba7",
-        measurementId: "G-E5GLVXWLR5"
-    };
+    <section class="about">
+        <h2>About Me</h2>
+        <p>I'm a passionate first-year BCA student at Kristu Jayanti University. I love building websites and solving problems with code. Currently exploring front-end development and looking forward to creating amazing digital experiences.</p>
+    </section>
 
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
+    <section class="certificates">
+        <h2>Certificates</h2>
+        <div class="cert-grid">
+            <div class="cert-card">
+                <h3>HTML Fundamentals</h3>
+                <p>Issued by: FreeCodeCamp</p>
+                <p>Completed: March 2025</p>
+            </div>
+            <div class="cert-card">
+                <h3>CSS Styling Mastery</h3>
+                <p>Issued by: Coursera</p>
+                <p>Completed: April 2025</p>
+            </div>
+            <div class="cert-card">
+                <h3>JavaScript Essentials</h3>
+                <p>Issued by: Udemy</p>
+                <p>Completed: May 2025</p>
+            </div>
+        </div>
+    </section>
 
-    const form = document.getElementById('contact-form');
-    const statusDiv = document.getElementById('form-status');
+    <section class="contact">
+        <h2>Contact Me</h2>
+        <form id="contact-form">
+            <input type="text" id="name" placeholder="Your Name" required>
+            <input type="email" id="email" placeholder="Your Email" required>
+            <textarea id="message" placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+        <div id="form-status"></div>
+    </section>
 
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const message = document.getElementById('message').value;
+    <footer>
+        <p>&copy; 2025 Raymond Melchior. All rights reserved.</p>
+    </footer>
 
-        try {
-            await addDoc(collection(db, "messages"), {
-                name: name,
-                email: email,
-                message: message,
-                timestamp: new Date()
-            });
-            statusDiv.innerHTML = "✅ Message sent successfully!";
-            form.reset();
-        } catch (error) {
-            console.error("Error adding document: ", error);
-            statusDiv.innerHTML = "❌ Failed to send. Please try again.";
-        }
-    });
-</script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
+
+        // Your Firebase config (from your project)
+        const firebaseConfig = {
+            apiKey: "AIzaSyCFpTZyULAwlyZdUpdT-4cK7_sY3U0yiWk",
+            authDomain: "portfolio-messages-56241.firebaseapp.com",
+            projectId: "portfolio-messages-56241",
+            storageBucket: "portfolio-messages-56241.firebasestorage.app",
+            messagingSenderId: "115427367526",
+            appId: "1:115427367526:web:6fe2f8a78f8bb90bf5eba7",
+            measurementId: "G-E5GLVXWLR5"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        const form = document.getElementById('contact-form');
+        const statusDiv = document.getElementById('form-status');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            try {
+                await addDoc(collection(db, "messages"), {
+                    name: name,
+                    email: email,
+                    message: message,
+                    timestamp: new Date()
+                });
+                statusDiv.innerHTML = "✅ Message sent successfully!";
+                form.reset();
+            } catch (error) {
+                console.error("Error adding document: ", error);
+                statusDiv.innerHTML = "❌ Failed to send. Please try again.";
+            }
+        });
+    </script>
+</body>
+</html>
