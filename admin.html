@@ -1,1 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Messages</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="admin-container" style="max-width: 800px; margin: 2rem auto; padding: 0 1rem;">
+        <h1>Message Dashboard</h1>
+        <div id="login-area">
+            <input type="password" id="admin-password" placeholder="Enter password" style="padding: 0.5rem; margin-right: 0.5rem;">
+            <button id="login-btn">Login</button>
+        </div>
+        <div id="messages-area" style="display:none;">
+            <h2>All Messages</h2>
+            <ul id="messages-list" style="list-style: none; padding: 0;"></ul>
+        </div>
+    </div>
 
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
+        import { getFirestore, collection, getDocs, orderBy, query } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
+
+        // 🔁 Replace with your actual Firebase config (same as in index.html)
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        const loginBtn = document.getElementById('login-btn');
+        const passwordInput = document.getElementById('admin-password');
+        const loginArea = document.getElementById('login-area');
+        const messagesArea = document.getElementById('messages-area');
+        const messagesList = document.getElementById('messages-list');
+
+        // 🔐 Change this to a strong password
+        const ADMIN_PASSWORD = "your_secret_password";
+
+        loginBtn.addEventListener('click', async () => {
+            if (passwordInput.value === ADMIN_PASSWORD) {
+                loginArea.style.display = 'none';
+                messagesArea.style.display = 'block';
+                await loadMessages();
+            } else {
+                alert("Wrong password");
+            }
+        });
+
+        async function loadMessages() {
+            const q = query(collection(db, "messages"), orderBy("timestamp", "desc"));
+            const querySnapshot = await getDocs(q);
+            messagesList.innerHTML = '';
+            querySnapshot.forEach((doc) => {
+                const data = doc.data();
+                const li = document.createElement('li');
+                li.style.background = '#f9f9f9';
+                li.style.margin = '1rem 0';
+                li.style.padding = '1rem';
+                li.style.borderRadius = '5px';
+                li.innerHTML = `<strong>${data.name}</strong> (${data.email})<br>${data.message}<br><small>${data.timestamp?.toDate?.() || 'unknown date'}</small>`;
+                messagesList.appendChild(li);
+            });
+        }
+    </script>
+</body>
+</html>
