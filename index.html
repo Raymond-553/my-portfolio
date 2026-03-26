@@ -8,10 +8,6 @@
 </head>
 <body>
     <header>
-        <div class="profile-img">
-            <!-- Replace with your own image URL (or keep as a placeholder) -->
-            <img src="https://via.placeholder.com/150" alt="Raymond Melchior">
-        </div>
         <h1>Raymond Melchior</h1>
         <p class="tagline">BCA 1st Year | Kristu Jayanti University</p>
         <p class="intro-text">
@@ -39,6 +35,7 @@
             <div class="skill-card">CSS3</div>
             <div class="skill-card">JavaScript</div>
             <div class="skill-card">Firebase</div>
+            <div class="skill-card">MongoDB</div>
             <div class="skill-card">Git & GitHub</div>
             <div class="skill-card">Responsive Design</div>
         </div>
@@ -49,18 +46,21 @@
         <div class="cert-grid">
             <div class="cert-card">
                 <h3>HTML Fundamentals</h3>
-                <p>Issued by: FreeCodeCamp</p>
-                <p>Completed: March 2025</p>
+                <p>Issued by: Infosys Springboard</p>
+                <p>Progress: 85% completed</p>
+                <div class="progress-bar"><div class="progress html-progress"></div></div>
             </div>
             <div class="cert-card">
                 <h3>CSS Styling Mastery</h3>
-                <p>Issued by: Coursera</p>
-                <p>Completed: April 2025</p>
+                <p>Issued by: Infosys Springboard</p>
+                <p>Progress: 70% completed</p>
+                <div class="progress-bar"><div class="progress css-progress"></div></div>
             </div>
             <div class="cert-card">
                 <h3>JavaScript Essentials</h3>
-                <p>Issued by: Udemy</p>
-                <p>Completed: May 2025</p>
+                <p>Issued by: Infosys Springboard</p>
+                <p>Progress: 60% completed</p>
+                <div class="progress-bar"><div class="progress js-progress"></div></div>
             </div>
         </div>
     </section>
@@ -81,7 +81,7 @@
     </footer>
 
     <script type="module">
-        // Keep your existing Firebase code exactly as before
+        // Your existing Firebase code – unchanged
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
         import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
 
