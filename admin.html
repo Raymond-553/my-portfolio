@@ -23,7 +23,7 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
         import { getFirestore, collection, getDocs, orderBy, query } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
 
-        // Your Firebase config (use the one from your project)
+        // Your Firebase config (exactly as from Firebase Console)
         const firebaseConfig = {
             apiKey: "AIzaSyCFpTZyULAwlyZdUpdT-4cK7_sY3U0yiWk",
             authDomain: "portfolio-messages-56241.firebaseapp.com",
@@ -43,8 +43,8 @@
         const messagesArea = document.getElementById('messages-area');
         const messagesList = document.getElementById('messages-list');
 
-        // 🔐 Change this to the password you want
-        const ADMIN_PASSWORD = "Atom2285";
+        // Set your password here
+        const ADMIN_PASSWORD = "Atom2285";   // <-- change if you want
 
         loginBtn.addEventListener('click', async () => {
             if (passwordInput.value === ADMIN_PASSWORD) {
